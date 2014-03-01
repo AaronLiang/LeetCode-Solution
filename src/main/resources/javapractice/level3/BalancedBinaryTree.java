@@ -1,0 +1,37 @@
+/**
+ * 
+ */
+package java.practice.level3;
+
+import java.practice.helper.TreeNode;
+
+/**
+ * @author aaronl Given a binary tree, determine if it is height-balanced.
+ * 
+ *         For this problem, a height-balanced binary tree is defined as a
+ *         binary tree in which the depth of the two subtrees of every node
+ *         never differ by more than 1.
+ */
+public class BalancedBinaryTree {
+
+	public boolean isBalanced(TreeNode root) {
+		if (root == null) {
+			return true;
+		}
+		int leftHeight = maxHeight(root.left);
+		int rightHeight = maxHeight(root.right);
+		if (Math.abs(leftHeight - rightHeight) > 1) {
+			return false;
+		}
+		return isBalanced(root.left) && isBalanced(root.right);
+	}
+
+	public int maxHeight(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		int leftHeight = maxHeight(root.left);
+		int rightHeight = maxHeight(root.right);
+		return 1 + Math.max(leftHeight, rightHeight);
+	}
+}
